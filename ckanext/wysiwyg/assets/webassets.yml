@@ -1,17 +1,33 @@
-wysiwyg-ckeditor-js:
+wysiwyg-ckeditor5-js:
   filter: rjsmin
-  output: ckanext-wysiwyg/%(version)s-wysiwyg-ckeditor-js
+  output: ckanext-wysiwyg/%(version)s-wysiwyg-ckeditor5-js
   contents:
-    - js/vendor/ckeditor.min.js
-    - js/wysiwyg-ckeditor-init.js
+    - js/vendor/ckeditor5.min.js
+    - js/wysiwyg-ckeditor5-init.js
   extra:
     preload:
       - base/main
 
-
-wysiwyg-ckeditor-css:
+wysiwyg-ckeditor5-css:
   filter: cssrewrite
-  output: ckanext-wysiwyg/%(version)s-wysiwyg-ckeditor.css
+  output: ckanext-wysiwyg/%(version)s-wysiwyg-ckeditor5.css
   contents:
-    - css/vendor/ckeditor.min.css
-    - css/styles.css
+    - css/vendor/ckeditor5.min.css
+    - css/ckeditor5-custom-styles.css
+
+wysiwyg-quill-js:
+  filter: rjsmin
+  output: ckanext-wysiwyg/%(version)s-wysiwyg-quill-js
+  contents:
+    - js/vendor/quill.min.js
+    - js/wysiwyg-quill-init.js
+  extra:
+    preload:
+      - base/main
+
+wysiwyg-quill-css:
+  filter: cssrewrite
+  output: ckanext-wysiwyg/%(version)s-wysiwyg-quill.css
+  contents:
+    - css/vendor/quill.min.css
+    - css/quill-custom-styles.css

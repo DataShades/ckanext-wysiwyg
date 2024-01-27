@@ -35,5 +35,5 @@ class Ckeditor5FileUpload(MethodView):
 
 
 wysiwyg.add_url_rule(
-    "/ckeditor/upload_file", view_func=Ckeditor5FileUpload.as_view("upload_file")
+    "/ckeditor5/upload_file", view_func=Ckeditor5FileUpload.as_view("upload_file")
 )

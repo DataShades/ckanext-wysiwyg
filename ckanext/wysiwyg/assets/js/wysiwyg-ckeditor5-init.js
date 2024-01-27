@@ -1,16 +1,16 @@
-this.ckan.module('wysiwyg-ckeditor-init', function ($) {
+this.ckan.module('wysiwyg-ckeditor5-init', function ($) {
     return {
         options: {},
         initialize: function () {
             $.proxyAll(this, /_/);
 
-            this._initCkEditor();
+            this._initEditor();
         },
-        _initCkEditor: function () {
+        _initEditor: function () {
             ClassicEditor.create(this.el[0], {
                 extraPlugins: ["SimpleUploadAdapter", "GeneralHtmlSupport", "ImageInsert"],
                 simpleUpload: {
-                    uploadUrl: ckan.url('/ckeditor/upload_file'),
+                    uploadUrl: ckan.url('/ckeditor5/upload_file'),
                 },
                 mediaEmbed: { previewsInData: true },
                 htmlSupport: {
