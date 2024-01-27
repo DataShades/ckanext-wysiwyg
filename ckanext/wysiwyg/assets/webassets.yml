@@ -1,0 +1,17 @@
+wysiwyg-ckeditor-js:
+  filter: rjsmin
+  output: ckanext-wysiwyg/%(version)s-wysiwyg-ckeditor-js
+  contents:
+    - js/vendor/ckeditor.min.js
+    - js/wysiwyg-ckeditor-init.js
+  extra:
+    preload:
+      - base/main
+
+
+wysiwyg-ckeditor-css:
+  filter: cssrewrite
+  output: ckanext-wysiwyg/%(version)s-wysiwyg-ckeditor.css
+  contents:
+    - css/vendor/ckeditor.min.css
+    - css/styles.css
