@@ -1,24 +1,35 @@
 this.ckan.module('wysiwyg-quill-init', function ($) {
     return {
         options: {
-            inputId: null
+            inputId: null,
+            forDisplay: false
         },
         initialize: function () {
             $.proxyAll(this, /_/);
 
+            this.container = $(".form-group-quill");
+            this.inputEl = document.getElementById(this.options.inputId);
             this.form = this.el.closest("form");
 
-            this.form.on("submit", (e) => {
-                const inputEl = document.getElementById(this.options.inputId);
-                // inputEl.value = JSON.stringify(window.quillEditor.getContents());
+            this._initEditor();
 
-                inputEl.value = window.quillEditor.root.innerHTML;
+            this.form.on("submit", (e) => {
+                this.inputEl.value = JSON.stringify(window.quill.getContents());
             })
 
-            this._initEditor();
+            $(".form-label-quill").click(() => {
+                window.quill.focus()
+            })
+
+            window.quill.root.addEventListener("focus", () => {
+                this.container.addClass("focused");
+            });
+            window.quill.root.addEventListener("blur", () => {
+                this.container.removeClass("focused");
+            });
         },
         _initEditor: function () {
-            window.quillEditor = new Quill(this.el[0], {
+            let config = {
                 theme: 'snow',
                 modules: {
                     toolbar: [
@@ -28,10 +39,15 @@ this.ckan.module('wysiwyg-quill-init', function ($) {
                         ['image', 'link', 'video', 'code-block'],
                         ['clean']
                     ]
-                },
-            })
+                }
+            }
 
-            window.quillEditor.clipboard.dangerouslyPasteHTML($(".ql-editor").text());
+            if (this.options.forDisplay) {
+                config = { readOnly: true };
+            }
+
+            window.quill = new Quill(this.el[0], config);
+            window.quill.setContents(JSON.parse(this.inputEl.value));
         },
     };
 });
