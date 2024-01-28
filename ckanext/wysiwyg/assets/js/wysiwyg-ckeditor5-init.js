@@ -10,7 +10,7 @@ this.ckan.module('wysiwyg-ckeditor5-init', function ($) {
             ClassicEditor.create(this.el[0], {
                 extraPlugins: ["SimpleUploadAdapter", "GeneralHtmlSupport", "ImageInsert"],
                 simpleUpload: {
-                    uploadUrl: ckan.url('/ckeditor5/upload_file'),
+                    uploadUrl: ckan.url('/wysiwyg/upload_file'),
                 },
                 mediaEmbed: { previewsInData: true },
                 htmlSupport: {

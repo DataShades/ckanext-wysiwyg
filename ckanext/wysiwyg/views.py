@@ -1,7 +1,5 @@
 import logging
 
-import json
-
 from flask import Blueprint, Response, jsonify
 from flask.views import MethodView
 
@@ -12,7 +10,7 @@ log = logging.getLogger(__name__)
 wysiwyg = Blueprint("wysiwyg", __name__)
 
 
-class Ckeditor5FileUpload(MethodView):
+class WysiwygFileUpload(MethodView):
     def post(self) -> Response:
         file = tk.request.files.get("upload")
 
@@ -35,5 +33,5 @@ class Ckeditor5FileUpload(MethodView):
 
 
 wysiwyg.add_url_rule(
-    "/ckeditor5/upload_file", view_func=Ckeditor5FileUpload.as_view("upload_file")
+    "/wysiwyg/upload_file", view_func=WysiwygFileUpload.as_view("upload_file")
 )

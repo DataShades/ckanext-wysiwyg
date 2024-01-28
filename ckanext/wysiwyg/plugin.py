@@ -4,6 +4,8 @@ import ckan.plugins.toolkit as toolkit
 
 @toolkit.blanket.actions
 @toolkit.blanket.blueprints
+@toolkit.blanket.validators
+@toolkit.blanket.helpers
 class WysiwygPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
 
