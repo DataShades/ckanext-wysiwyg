@@ -47,7 +47,10 @@ this.ckan.module('wysiwyg-quill-init', function ($) {
             }
 
             window.quill = new Quill(this.el[0], config);
-            window.quill.setContents(JSON.parse(this.inputEl.value));
+
+            if (this.inputEl.value && this.inputEl.value.trim()) {
+                window.quill.setContents(JSON.parse(this.inputEl.value));
+            }
         },
     };
 });
