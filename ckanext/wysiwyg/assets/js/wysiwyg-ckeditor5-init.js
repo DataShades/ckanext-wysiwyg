@@ -40,6 +40,10 @@ this.ckan.module('wysiwyg-ckeditor5-init', function ($) {
          * @param {Node} element
          */
         _initEditor: function (element) {
+            if (typeof window.ckeditors === "undefined") {
+                window.ckeditors = [];
+            }
+
             ClassicEditor.create(element, {
                 extraPlugins: ["SimpleUploadAdapter", "GeneralHtmlSupport", "ImageInsert"],
                 simpleUpload: {
@@ -53,7 +57,9 @@ this.ckan.module('wysiwyg-ckeditor5-init', function ($) {
                         }
                     ]
                 }
+            }).then(editor => {
+                window.ckeditors.push(editor)
             });
-        }
+        },
     };
 });
