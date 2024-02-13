@@ -30,7 +30,7 @@ this.ckan.module('wysiwyg-summernote-init', function ($) {
         },
 
         /**
-         * Initialize Quill editor on an element
+         * Initialize Summernote editor on an element
          *
          * @param {Node} element
          */

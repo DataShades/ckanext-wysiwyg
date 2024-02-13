@@ -17,25 +17,6 @@ wysiwyg-ckeditor5-css:
     - css/vendor/ckeditor5.min.css
     - css/ckeditor5-custom-styles.css
 
-# QUILL
-
-wysiwyg-quill-js:
-  filter: rjsmin
-  output: ckanext-wysiwyg/%(version)s-wysiwyg-quill-js
-  contents:
-    - js/vendor/quill.min.js
-    - js/wysiwyg-quill-init.js
-  extra:
-    preload:
-      - base/main
-
-wysiwyg-quill-css:
-  filter: cssrewrite
-  output: ckanext-wysiwyg/%(version)s-wysiwyg-quill.css
-  contents:
-    - css/vendor/quill.min.css
-    - css/quill-custom-styles.css
-
 # SUMMETNOTE
 
 wysiwyg-summernote-js:
