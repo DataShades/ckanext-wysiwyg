@@ -1,13 +1,41 @@
 this.ckan.module('wysiwyg-summernote-init', function ($) {
     return {
-        options: {},
+        options: {
+            editor: "summernote"
+        },
         initialize: function () {
             $.proxyAll(this, /_/);
 
-            this._initEditor();
+            htmx.on("htmx:afterSettle", this._initEditors);
+
+            // on first init
+            this._initEditors();
         },
-        _initEditor: function () {
-            this.el.summernote({
+
+        _initEditors: function (e) {
+            let elements = document.querySelectorAll(`[wysiwyg-editor='${this.options.editor}']`);
+
+            if (typeof e !== 'undefined') {
+                if (e.target.getAttribute("wysiwyg-editor") === this.options.editor) {
+                    this._initEditor(e.target);
+                    return;
+                }
+
+                elements = e.target.querySelectorAll(`[wysiwyg-editor='${this.options.editor}']`);
+            }
+
+            for (let node of elements) {
+                this._initEditor(node);
+            }
+        },
+
+        /**
+         * Initialize Quill editor on an element
+         *
+         * @param {Node} element
+         */
+        _initEditor: function (element) {
+            $(element).summernote({
                 minHeight: 300,
                 callbacks: {
                     onImageUpload: (file) => {

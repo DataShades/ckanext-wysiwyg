@@ -1,8 +1,5 @@
-{% asset 'wysiwyg/wysiwyg-quill-js' %}
-{% asset 'wysiwyg/wysiwyg-quill-css' %}
-
 <div class="ql-editor-display">
-    <div id="quill-editor2" data-module="wysiwyg-quill-init" data-module-input-id="{{ 'field-' + field.field_name }}" data-module-for-display="true">
+    <div id="quill-editor2" wysiwyg-editor="quill" wysiwyg-input-id="{{ 'field-' + field.field_name }}" wysiwyg-for-display="true">
 
     </div>
 </div>

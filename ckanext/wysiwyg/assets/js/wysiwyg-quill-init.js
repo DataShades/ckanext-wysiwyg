@@ -2,33 +2,65 @@ this.ckan.module('wysiwyg-quill-init', function ($) {
     return {
         options: {
             inputId: null,
-            forDisplay: false
+            forDisplay: false,
+            editor: "quill"
         },
         initialize: function () {
             $.proxyAll(this, /_/);
 
-            this.container = $(".form-group-quill");
-            this.inputEl = document.getElementById(this.options.inputId);
-            this.form = this.el.closest("form");
+            htmx.on("htmx:afterSettle", this._initEditors);
 
-            this._initEditor();
+            // on first init
+            this._initEditors();
+
+            if (typeof window.quill !== 'undefined') {
+                $(".form-label-quill").click(() => {
+                    window.quill.focus()
+                })
+
+                this.container = $(".form-group-quill");
+
+                window.quill.root.addEventListener("focus", () => {
+                    this.container.addClass("focused");
+                });
+                window.quill.root.addEventListener("blur", () => {
+                    this.container.removeClass("focused");
+                });
+            }
+        },
+
+        _initEditors: function (e) {
+            let elements = document.querySelectorAll(`[wysiwyg-editor='${this.options.editor}']`);
+
+            if (typeof e !== 'undefined') {
+                if (e.target.getAttribute("wysiwyg-editor") === this.options.editor) {
+                    this._initEditor(e.target);
+                    return;
+                }
+
+                elements = e.target.querySelectorAll(`[wysiwyg-editor='${this.options.editor}']`);
+            }
+
+            for (let node of elements) {
+                this._initEditor(node);
+            }
+        },
+
+        /**
+         * Initialize Quill editor on an element
+         *
+         * @param {Node} element
+         */
+        _initEditor: function (element) {
+            var forDisplay = element.getAttribute("wysiwyg-for-display") || false;
+
+            this.inputEl = document.getElementById(element.getAttribute("wysiwyg-input-id"));
+            this.form = this.el.closest("form");
 
             this.form.on("submit", (e) => {
                 this.inputEl.value = JSON.stringify(window.quill.getContents());
             })
 
-            $(".form-label-quill").click(() => {
-                window.quill.focus()
-            })
-
-            window.quill.root.addEventListener("focus", () => {
-                this.container.addClass("focused");
-            });
-            window.quill.root.addEventListener("blur", () => {
-                this.container.removeClass("focused");
-            });
-        },
-        _initEditor: function () {
             let config = {
                 theme: 'snow',
                 modules: {
@@ -42,11 +74,11 @@ this.ckan.module('wysiwyg-quill-init', function ($) {
                 }
             }
 
-            if (this.options.forDisplay) {
+            if (forDisplay) {
                 config = { readOnly: true };
             }
 
-            window.quill = new Quill(this.el[0], config);
+            window.quill = new Quill(element, config);
 
             if (this.inputEl.value && this.inputEl.value.trim()) {
                 window.quill.setContents(JSON.parse(this.inputEl.value));
