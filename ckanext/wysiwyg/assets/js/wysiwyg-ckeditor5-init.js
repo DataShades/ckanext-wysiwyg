@@ -49,6 +49,7 @@ this.ckan.module('wysiwyg-ckeditor5-init', function ($) {
                 simpleUpload: {
                     uploadUrl: ckan.url('/wysiwyg/upload_file'),
                 },
+                mediaEmbed: { previewsInData: true },
                 htmlSupport: {
                     allow: [
                         {
@@ -57,10 +58,10 @@ this.ckan.module('wysiwyg-ckeditor5-init', function ($) {
                     ]
                 },
                 toolbar: {
-                    items: ["heading", "|", "textPartLanguage", "style", "fontBackgroundColor", "fontColor", "fontFamily", "fontSize", "|", "selectAll", "removeFormat", "specialCharacters", "bold", "italic", "underline", "strikethrough", "superscript", "link", "bulletedList", "numberedList", "todoList", "|", "horizontalLine", "outdent", "indent", "alignment", "pageBreak", "|", "sourceEditing", "codeBlock", "htmlEmbed", "imageInsert", "insertTable", "|", "undo", "redo", "accessibilityHelp", "highlight", "restrictedEditingException", "showBlocks", "findAndReplace", "blockQuote"],
+                    items: ["heading", "|", "style", "fontBackgroundColor", "fontColor", "fontFamily", "fontSize", "|", "selectAll", "removeFormat", "specialCharacters", "bold", "italic", "underline", "strikethrough", "superscript", "link", "bulletedList", "numberedList", "todoList", "|", "horizontalLine", "outdent", "indent", "alignment", "pageBreak", "|", "sourceEditing", "codeBlock", "htmlEmbed", "imageInsert", "mediaEmbed", "insertTable", "|", "undo", "redo", "accessibilityHelp", "highlight", "restrictedEditingException", "showBlocks", "findAndReplace", "blockQuote"],
                     shouldNotGroupWhenFull: true
                 },
-                // removePlugins: ['Title'],
+                removePlugins: ['Language', 'MediaEmbedToolbar', 'Autosave'],
             }).then(editor => {
                 window.ckeditors.push(editor)
             });
