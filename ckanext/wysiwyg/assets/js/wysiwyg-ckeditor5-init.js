@@ -44,19 +44,23 @@ this.ckan.module('wysiwyg-ckeditor5-init', function ($) {
                 window.ckeditors = [];
             }
 
-            ClassicEditor.create(element, {
-                extraPlugins: ["SimpleUploadAdapter", "GeneralHtmlSupport", "ImageInsert"],
+            CKSource.Editor.create(element, {
+                extraPlugins: ["GeneralHtmlSupport", "ImageInsert", "SimpleUploadAdapter"],
                 simpleUpload: {
                     uploadUrl: ckan.url('/wysiwyg/upload_file'),
                 },
-                mediaEmbed: { previewsInData: true },
                 htmlSupport: {
                     allow: [
                         {
                             name: "/^(div|p|h[2-4])$/'",
                         }
                     ]
-                }
+                },
+                toolbar: {
+                    items: ["heading", "|", "textPartLanguage", "style", "fontBackgroundColor", "fontColor", "fontFamily", "fontSize", "|", "selectAll", "removeFormat", "specialCharacters", "bold", "italic", "underline", "strikethrough", "superscript", "link", "bulletedList", "numberedList", "todoList", "|", "horizontalLine", "outdent", "indent", "alignment", "pageBreak", "|", "sourceEditing", "codeBlock", "htmlEmbed", "imageInsert", "insertTable", "|", "undo", "redo", "accessibilityHelp", "highlight", "restrictedEditingException", "showBlocks", "findAndReplace", "blockQuote"],
+                    shouldNotGroupWhenFull: true
+                },
+                // removePlugins: ['Title'],
             }).then(editor => {
                 window.ckeditors.push(editor)
             });
