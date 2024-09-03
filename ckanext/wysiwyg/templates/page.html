@@ -1,7 +1,8 @@
 {% ckan_extends %}
 
 
-{% block body_extras -%}
+{% block header -%}
+    {{ super() }}
     <span class="hidden" data-module="wysiwyg-ckeditor5-init wysiwyg-summernote-init"></span>
 {%- endblock %}
 
