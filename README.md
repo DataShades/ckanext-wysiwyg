@@ -1,4 +1,4 @@
-[![Tests](https://github.com//ckanext-wysiwyg/workflows/Tests/badge.svg?branch=main)](https://github.com//ckanext-wysiwyg/actions)
+[![Tests](https://github.com/DataShades/ckanext-wysiwyg/workflows/Tests/badge.svg?branch=main)](https://github.com/DataShades/ckanext-wysiwyg/actions)
 
 # ckanext-wysiwyg
 
@@ -43,7 +43,7 @@ To install ckanext-wysiwyg:
 
 2. Clone the source and install it on the virtualenv
 
-    git clone https://github.com//ckanext-wysiwyg.git
+    git clone https://github.com/DataShades/ckanext-wysiwyg.git
     cd ckanext-wysiwyg
     pip install -e .
 	pip install -r requirements.txt
@@ -73,7 +73,7 @@ None at present
 To install ckanext-wysiwyg for development, activate your CKAN virtualenv and
 do:
 
-    git clone https://github.com//ckanext-wysiwyg.git
+    git clone https://github.com/DataShades/ckanext-wysiwyg.git
     cd ckanext-wysiwyg
     python setup.py develop
     pip install -r dev-requirements.txt
